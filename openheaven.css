@@ -1,0 +1,1024 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            max-width: 100vw;
+            align-self: center;
+
+        }
+
+        :root {
+            --deep-blue: #0a1628;
+            --midnight: #0d1b2a;
+            --navy: #1b2838;
+            --royal-blue: #2a4a6f;
+            --accent-gold: #c9a84c;
+            --accent-gold-light: #e8d5a3;
+            --text-primary: #e8ecf1;
+            --text-secondary: #a8b8c8;
+            --text-muted: #6b8299;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            max-width: 100vw;
+            line-height: 1.7;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(42, 74, 111, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(27, 40, 56, 0.8) 0%, var(--deep-blue) 100%);
+            animation: bgPulse 12s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .header-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.2s;
+            color: var(--accent-gold);
+        }
+
+        .header-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.4s;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.6s;
+        }
+
+        .header-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.8s;
+        }
+
+        .header-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 24px auto 0;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 1s, shimmer 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .section {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease forwards;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(201, 168, 76, 0.1);
+        }
+
+        .section:nth-child(1) { animation-delay: 1.2s; }
+        .section:nth-child(2) { animation-delay: 1.4s; }
+        .section:nth-child(3) { animation-delay: 1.6s; }
+        .section:nth-child(4) { animation-delay: 1.8s; }
+        .section:nth-child(5) { animation-delay: 2.0s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section::before,
+        .section::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-gold);
+            opacity: 0.3;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .section::before {
+            top: 16px;
+            left: 16px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 8px 0 0 0;
+        }
+
+        .section::after {
+            bottom: 16px;
+            right: 16px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 8px 0;
+        }
+
+        .section:hover::before,
+        .section:hover::after {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: rgba(201, 168, 76, 0.08);
+            border-radius: 30px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .section-label svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent-gold);
+        }
+
+        .topic-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .topic-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .verse-box {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(201, 168, 76, 0.02));
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 0 12px 12px 0;
+            padding: 28px 32px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .verse-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .verse-reference {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            margin-top: 16px;
+            letter-spacing: 1px;
+        }
+
+        .verse-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--accent-gold);
+            opacity: 0.15;
+            line-height: 1;
+        }
+
+        .bible-passage {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+
+        .bible-passage p {
+            margin-bottom: 16px;
+            text-indent: 0;
+        }
+
+        .bible-passage .verse-num {
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            vertical-align: super;
+            margin-right: 4px;
+            font-weight: 600;
+        }
+
+        .passage-reference {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            text-align: right;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .message-body {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+
+        .message-body p {
+            margin-bottom: 20px;
+        }
+
+        .message-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .message-body em {
+            color: var(--accent-gold-light);
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: rgba(201, 168, 76, 0.06);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent-gold-light);
+        }
+
+        .prayer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prayer-list li {
+            position: relative;
+            padding: 16px 0 16px 48px;
+            border-bottom: 1px solid var(--glass-border);
+            transition: padding-left 0.3s ease;
+        }
+
+        .prayer-list li:last-child {
+            border-bottom: none;
+        }
+
+        .prayer-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .prayer-list li::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .prayer-list li:hover {
+            padding-left: 56px;
+        }
+
+        .prayer-list li:hover::before {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--accent-gold);
+        }
+
+        .prayer-list li:hover::after {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .prayer-list li span {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 20px;
+        }
+
+        .footer-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .footer-verse {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+            z-index: 1000;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+        }
+
+        .section {
+            position: relative;
+        }
+
+        .section .glow {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, rgba(201, 168, 76, 0.1), transparent);
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .section:hover .glow {
+            opacity: 1;
+        }
+
+         .home-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0 20px;
+            perspective: 1000px;
+        }
+
+        .home-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 44px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--accent-gold);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            overflow: visible;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1;
+        }
+
+        .home-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(201, 168, 76, 0.15) 0%, 
+                rgba(201, 168, 76, 0.05) 50%,
+                rgba(201, 168, 76, 0.15) 100%);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            border-radius: 50px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -2;
+            background-size: 200% 200%;
+            animation: subtleShimmer 8s ease infinite;
+        }
+
+        @keyframes subtleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .home-btn:hover::before {
+            animation: none;
+        }
+
+        .home-btn::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, 
+                var(--accent-gold), 
+                var(--accent-gold-light), 
+                var(--accent-gold),
+                var(--accent-gold-light));
+            background-size: 400% 400%;
+            border-radius: 52px;
+            opacity: 0;
+            z-index: -3;
+            filter: blur(8px);
+            animation: gradientShift 4s ease infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-glow-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 54px;
+            border: 1px solid transparent;
+            background: linear-gradient(45deg, var(--accent-gold), transparent, var(--accent-gold)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: rotateRing 6s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .btn-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0;
+            top: 50%;
+            left: 50%;
+        }
+
+        .home-btn:hover .btn-particle {
+            animation: particleBurst 0.8s ease-out forwards;
+        }
+
+        .btn-particle:nth-child(1) { animation-delay: 0s; }
+        .btn-particle:nth-child(2) { animation-delay: 0.05s; }
+        .btn-particle:nth-child(3) { animation-delay: 0.1s; }
+        .btn-particle:nth-child(4) { animation-delay: 0.15s; }
+        .btn-particle:nth-child(5) { animation-delay: 0.2s; }
+        .btn-particle:nth-child(6) { animation-delay: 0.25s; }
+        .btn-particle:nth-child(7) { animation-delay: 0.3s; }
+        .btn-particle:nth-child(8) { animation-delay: 0.35s; }
+
+        @keyframes particleBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(
+                    calc(-50% + var(--tx)), 
+                    calc(-50% + var(--ty))
+                ) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .btn-icon-wrap {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent-gold);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.4s ease;
+        }
+
+        .btn-ripple {
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .btn-ripple span {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .home-btn:hover {
+            color: var(--deep-blue);
+            transform: translateY(-3px) scale(1.02);
+            letter-spacing: 4px;
+        }
+
+        .home-btn:hover::before {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            border-color: transparent;
+            box-shadow: 
+                0 10px 40px rgba(201, 168, 76, 0.3),
+                0 0 60px rgba(201, 168, 76, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .home-btn:hover::after {
+            opacity: 0.6;
+        }
+
+        .home-btn:hover .btn-glow-ring {
+            opacity: 1;
+        }
+
+        .home-btn:hover .btn-icon-wrap {
+            transform: translateX(-4px) rotate(-10deg);
+        }
+
+        .home-btn:hover .btn-icon-wrap svg {
+            stroke: var(--deep-blue);
+            fill: rgba(10, 22, 40, 0.1);
+        }
+
+        /* Click / Active State */
+        .home-btn:active {
+            transform: translateY(-1px) scale(0.98);
+            transition: transform 0.1s ease;
+        }
+
+        .home-btn-magnetic {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            margin: -20px;
+        }
+
+        .home-button-container {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: buttonEntrance 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation-delay: 2.4s;
+        }
+
+        @keyframes buttonEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-pulse-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 56px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            opacity: 0;
+            animation: pulseRing 3s ease-out infinite;
+            animation-delay: 3s;
+            pointer-events: none;
+        }
+
+        .btn-pulse-ring:nth-child(2) {
+            animation-delay: 3.5s;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+
+            }
+
+
+            .hymn-section {
+            position: relative;
+        }
+
+        .hymn-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .hymn-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .hymn-author {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .hymn-tune {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hymn-body {
+            font-family: 'Playfair Display', serif;
+            line-height: 2.2;
+        }
+
+        .hymn-stanza {
+            margin-bottom: 32px;
+            padding: 24px 28px;
+            background: rgba(201, 168, 76, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(201, 168, 76, 0.08);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hymn-stanza:hover {
+            background: rgba(201, 168, 76, 0.06);
+            border-color: rgba(201, 168, 76, 0.15);
+            transform: translateX(4px);
+        }
+
+        .stanza-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+            display: inline-block;
+        }
+
+        .hymn-line {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .hymn-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .hymn-stanza:hover .hymn-line::before {
+            opacity: 0.8;
+            transform: translateY(-50%) scale(1.3);
+        }
+
+        .hymn-refrain {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-style: italic;
+            margin-top: 12px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .hymn-refrain::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 1px;
+            background: var(--accent-gold);
+            opacity: 0.6;
+        }
+
+        .hidden-stanza {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-bottom: 0;
+            padding: 0 28px;
+            transform: translateY(-20px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hidden-stanza.visible {
+            max-height: 600px;
+            opacity: 1;
+            margin-bottom: 32px;
+            padding: 24px 28px;
+            transform: translateY(0);
+        }
+
+        .hymn-toggle-btn {
+            display: flex;
+            align-self: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px 24px;
+            margin-top: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            background: rgba(201, 168, 76, 0.06);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hymn-toggle-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.02));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hymn-toggle-btn:hover {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: rgba(201, 168, 76, 0.4);
+            letter-spacing: 3px;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.1);
+        }
+
+        .hymn-toggle-btn:hover::before {
+            opacity: 1;
+        }
+
+        .hymn-toggle-btn:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
+        }
+
+        .toggle-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .toggle-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent-gold);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hymn-toggle-btn.expanded .toggle-icon svg {
+            transform: rotate(180deg);
+        }
+
+        .toggle-text {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+
+        @media (max-width: 640px) {
+            .section {
+                padding: 28px 20px;
+                margin-bottom: 24px;
+            }
+
+            .verse-box {
+                padding: 20px 24px;
+            }
+
+            .prayer-list li {
+                padding-left: 40px;
+            }
+
+            .prayer-list li::before {
+                width: 24px;
+                height: 24px;
+            }
+
+            .prayer-list li::after {
+                left: 8px;
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        .section-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: contentFadeIn 0.6s ease forwards;
+            animation-delay: inherit;
+        }
+
+        .section:nth-child(1) .section-content { animation-delay: 1.4s; }
+        .section:nth-child(2) .section-content { animation-delay: 1.6s; }
+        .section:nth-child(3) .section-content { animation-delay: 1.8s; }
+        .section:nth-child(4) .section-content { animation-delay: 2.0s; }
+        .section:nth-child(5) .section-content { animation-delay: 2.2s; }
+
+        @keyframes contentFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
